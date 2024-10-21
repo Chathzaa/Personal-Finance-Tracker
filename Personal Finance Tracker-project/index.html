@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Personal Finance Tracker</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+		.card {
+			border: 2px;
+			border-radius: 25px
+		}
+
+		.c-details span {
+			font-weight: 400;
+			font-size: 50px
+		}
+
+		.icon {
+			width: 75px;
+			height: 75px;
+			background-color: rgb(255, 255, 255);
+			border-radius: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 70px
+		}
+
+		.badge span {
+			max-width: 200px;
+			height: 10px;
+			padding-bottom: 5px;
+			border-radius: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center
+
+
+
+		}
+
+
+        .section-container {
+            display: inline-block;
+            width: 45%;
+            margin: 10px;
+            vertical-align: top;
+        }
+
+       
+	</style>
+	<link rel="shortcut icon" href="images\favicon.png" type="image/x-icon">
+</head>
+
+<body>
+	<div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar" class="active" >
+			<h1>
+				<a href="index.html" class="logo">
+					<img src="logo.png" alt="Logo" style="max-width: 500px; max-height: 75px;">
+				</a>
+			</h1>
+			<ul class="list-unstyled components mb-5">
+				<li class="active">
+					<a href="index.html"><span class="fa fa-dashboard"></span> Dashboard</a>
+				</li>
+				<li>
+					<a href="transaction.html"><span class="fa fa-plus-circle"></span> New</a>
+				</li>
+				<li>
+					<a href="history.html"><span class="fa fa-bar-chart"></span> Analysis</a>
+				</li>
+				<li>
+					<a href="Help.html"><span class="fa fa-question-circle"></span> Help</a>
+				</li>
+			</ul>
+		</nav>
+
+		<!-- Page Content  -->
+        
+		<div id="content" class="p-4 p-md-5" style="background: linear-gradient(to bottom right, #a564d3, #b66ee8, #c879ff, #d689ff, #e498ff, #f2a8ff, #ffb7ff, #ffc4ff);">
+  
+			<nav class="navbar navbar-expand-lg" style="background-color: #dec9e9; ">
+				<div class="container-fluid">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+						<i class="fa fa-bars"></i>
+						<span class="sr-only">Toggle Menu</span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="nav navbar-nav ml-auto">
+							<li class="nav-item active">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="container mt-5">
+				<div class="row">
+					<div class="col-md-4 col-sm-12" >
+						<div class="card p-3 mb-2">
+							<div class="d-flex justify-content-between">
+								<div class="d-flex flex-row align-items-center" style="color: #05697f">
+									<div class="icon"> <i class="fa fa-money"></i> </div>
+									<div class="ms-2 c-details ml-1">
+										<h2 class="mb-0">INCOME</h2>
+										<!--<div class="badge"></div>-->
+									</div>
+								</div>
+							</div>
+							<div class="badge"></div>
+							<div class="mt-5">
+								<h3 class="heading">
+									<span id="income"></span>
+								</h3>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<div class="card p-3 mb-2">
+							<div class="d-flex justify-content-between">
+								<div class="d-flex flex-row align-items-center" style="color: #ac0a8f">
+									<div class="icon"> <i class="fa fa-shopping-cart"></i> </div>
+									<div class="ms-2 c-details ml-1">
+										<h2 class="mb-0">EXPENSES</h2>
+										<!--<div class="badge"></div>-->
+									</div>
+								</div>
+							</div>
+							<div class="badge"></div>
+							<div class="mt-5">
+								<h3 class="heading">
+									<span id="expense"></span>
+								</h3>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<div class="card p-3 mb-2">
+							<div class="d-flex justify-content-between">
+								<div class="d-flex flex-row align-items-center" style="color: #a73b09">
+									<div class="icon"> <i class="fa fa-balance-scale"></i> </div>
+									<div class="ms-2 c-details ml-1">
+										<h2 class="mb-0">BALANCE</h2>
+										<!--<div class="badge"></div>-->
+									</div>
+								</div>
+							</div>
+							<div class="badge"></div>
+							<div class="mt-5">
+								<h3 class="heading">
+									<span id="balance"></span>
+								</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<!--<div id="curve_chart" class="w-100"></div>-->
+						<div id="chart_div" style="width: 100%; height: 400px;"></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+    <div style="padding-bottom: 50px; padding-top: 50px; background: linear-gradient(to bottom right, #f8f9fa, #e9ecef, #dee2e6);">
+
+
+
+
+
+<!-- Donut Chart Section -->
+<div class="section-container" style="padding-left: 100px;">
+    
+
+   
+
+<section class="section-animation" style="display: flex; justify-content: space-around; padding-top: 50px;  background: linear-gradient(to bottom right, #dc97ff, #bd68ee, #ab51e3, #8b2fc9, #5a108f, #4a0a77, #3c0663, #310055); padding-bottom: 50px; border-radius: 5%;">
+    <style>
+        .section-animation {
+transition: all 0.3s ease;
+}
+
+.section-animation:hover {
+transform: scale(1.05);
+}
+
+    </style>
+    <!-- First Donut Chart -->
+    <div style="padding-top: 20px;">
+        <canvas id="expenseComparisonDonutChart1" width="300" height="300"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Function to update the first donut chart
+            function updateDonutChart1() {
+                var expenseData = JSON.parse(localStorage.getItem("transactions")) || [];
+                var variable1Total = 0;
+                var variable2Total = 0;
+
+                // Sum expenses for variable1 and variable2
+                expenseData.forEach(function (transaction) {
+                    if (transaction.type === "expense") {
+                        switch (transaction.category.toLowerCase()) {
+                            case "food":
+                                variable1Total += parseFloat(transaction.amount);
+                                break;
+                            case "transportation":
+                                variable2Total += parseFloat(transaction.amount);
+                                break;
+                            // Add more cases for additional variables if needed
+                            default:
+                                break;
+                        }
+                    }
+                });
+
+                // Prepare data for the first donut chart
+                var data = [variable1Total, variable2Total];
+                var labels = ['Food', 'Transportation']; // Add labels for additional variables
+
+                // Change the font color for "Food" and "Transportation"
+                 var fontColor = '#ffffff'; // White color for font
+
+                // Create the first donut chart
+                var ctx = document.getElementById('expenseComparisonDonutChart1').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: [
+                                '#ebc9ff',
+                                '#bbd0ff',
+                                // Add more colors for additional variables
+                            ],
+                            
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        aspectRatio: 1,
+                        plugins: {
+                    legend: {
+                        labels: {
+                            color: fontColor // Set font color
+                        }
+                    }
+                }
+                    },
+                });
+            }
+
+            // Call the function to update the first donut chart
+            updateDonutChart1();
+        </script>
+    </div>
+</section>
+</div>
+
+
+<div class="section-container" style="padding-left: 100px;">
+    <section class="section-animation" style="display: flex; justify-content: space-around; padding-top: 50px;  background: linear-gradient(to bottom right, #dc97ff, #bd68ee, #ab51e3, #8b2fc9, #5a108f, #4a0a77, #3c0663, #310055); padding-bottom: 50px; border-radius: 5%;">
+        <style>
+            .section-animation {
+    transition: all 0.3s ease;
+    }
+    
+    .section-animation:hover {
+    transform: scale(1.05);
+    }
+    
+        </style>
+    <!-- Second Donut Chart -->
+    <div style="padding-top: 20px;">
+        <canvas id="expenseComparisonDonutChart2" width="300" height="300"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Function to update the second donut chart
+            function updateDonutChart2() {
+                var expenseData = JSON.parse(localStorage.getItem("transactions")) || [];
+                var variable1Total = 0;
+                var variable2Total = 0;
+
+                // Sum expenses for variable1 and variable2
+                expenseData.forEach(function (transaction) {
+                    if (transaction.type === "expense") {
+                        switch (transaction.category.toLowerCase()) {
+                            case "health":
+                                variable1Total += parseFloat(transaction.amount);
+                                break;
+                            case "transportation":
+                                variable2Total += parseFloat(transaction.amount);
+                                break;
+                            // Add more cases for additional variables if needed
+                            default:
+                                break;
+                        }
+                    }
+                });
+
+                // Prepare data for the second donut chart
+                var data = [variable1Total, variable2Total];
+                var labels = ['Health', 'Transportation']; // Add labels for additional variables
+
+                 // Change the font color for "Food" and "Transportation"
+        var fontColor = '#ffffff'; // White color for font
+
+                // Create the second donut chart
+                var ctx = document.getElementById('expenseComparisonDonutChart2').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: [
+                                '#ebc9ff',
+                                '#bbd0ff',
+                                // Add more colors for additional variables
+                            ],
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        aspectRatio: 1,
+                        plugins: {
+                    legend: {
+                        labels: {
+                            color: fontColor // Set font color
+                        }
+                    }
+                }
+                    },
+                });
+            }
+
+            // Call the function to update the second donut chart
+            updateDonutChart2();
+        </script>
+    </div>
+</section>
+</div>
+
+
+
+
+<div class="section-container" style="padding-left: 100px;">
+<!-- Donut Chart Section -->
+<section class="section-animation" style="display: flex; justify-content: space-around; padding-top: 50px;  background: linear-gradient(to bottom right, #dc97ff, #bd68ee, #ab51e3, #8b2fc9, #5a108f, #4a0a77, #3c0663, #310055); padding-bottom: 50px; border-radius: 5%;">
+    <style>
+        .section-animation {
+transition: all 0.3s ease;
+}
+
+.section-animation:hover {
+transform: scale(1.05);
+}
+
+
+    </style>
+    <!-- Third Donut Chart -->
+    <div style="padding-top: 20px;">
+        <canvas id="expenseComparisonDonutChart3" width="300" height="300"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Function to update the first donut chart
+            function updateDonutChart3() {
+                var expenseData = JSON.parse(localStorage.getItem("transactions")) || [];
+                var variable1Total = 0;
+                var variable2Total = 0;
+
+                // Sum expenses for variable1 and variable2
+                expenseData.forEach(function (transaction) {
+                    if (transaction.type === "expense") {
+                        switch (transaction.category.toLowerCase()) {
+                            case "education":
+                                variable1Total += parseFloat(transaction.amount);
+                                break;
+                            case "transportation":
+                                variable2Total += parseFloat(transaction.amount);
+                                break;
+                            // Add more cases for additional variables if needed
+                            default:
+                                break;
+                        }
+                    }
+                });
+
+                // Prepare data for the first donut chart
+                var data = [variable1Total, variable2Total];
+                var labels = ['Education', 'Transportation']; // Add labels for additional variables
+
+                 // Change the font color for "Food" and "Transportation"
+        var fontColor = '#ffffff'; // White color for font
+
+                // Create the first donut chart
+                var ctx = document.getElementById('expenseComparisonDonutChart3').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: [
+                                '#ebc9ff',
+                                '#bbd0ff',
+                                // Add more colors for additional variables
+                            ],
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        aspectRatio: 1,
+                        plugins: {
+                    legend: {
+                        labels: {
+                            color: fontColor // Set font color
+                        }
+                    }
+                }
+                    },
+                });
+            }
+
+            // Call the function to update the first donut chart
+            updateDonutChart3();
+        </script>
+    </div>
+    </section>
+    </div>
+
+   
+
+    <!-- fourth Donut Chart -->
+    <div class="section-container" style="padding-left: 100px;">
+        <section class="section-animation" style="display: flex; justify-content: space-around; padding-top: 50px; padding-bottom: 20px;  background: linear-gradient(to bottom right, #dc97ff, #bd68ee, #ab51e3, #8b2fc9, #5a108f, #4a0a77, #3c0663, #310055); padding-bottom: 50px; border-radius: 5%;">
+            <style>
+                .section-animation {
+        transition: all 0.3s ease;
+        }
+        
+        .section-animation:hover {
+        transform: scale(1.15);
+        }
+        
+            </style>
+        <canvas id="expenseComparisonDonutChart4" width="300" height="300"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Function to update the second donut chart
+            function updateDonutChart4() {
+                var expenseData = JSON.parse(localStorage.getItem("transactions")) || [];
+                var variable1Total = 0;
+                var variable2Total = 0;
+
+                // Sum expenses for variable1 and variable2
+                expenseData.forEach(function (transaction) {
+                    if (transaction.type === "expense") {
+                        switch (transaction.category.toLowerCase()) {
+                            case "education":
+                                variable1Total += parseFloat(transaction.amount);
+                                break;
+                            case "food":
+                                variable2Total += parseFloat(transaction.amount);
+                                break;
+                            // Add more cases for additional variables if needed
+                            default:
+                                break;
+                        }
+                    }
+                });
+
+                // Prepare data for the second donut chart
+                var data = [variable1Total, variable2Total];
+                var labels = ['Education', 'Food']; // Add labels for additional variables
+
+                 // Change the font color for "Food" and "Transportation"
+        var fontColor = '#ffffff'; // White color for font
+
+                // Create the second donut chart
+                var ctx = document.getElementById('expenseComparisonDonutChart4').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: [
+                                '#ebc9ff',
+                                '#bbd0ff',
+                                // Add more colors for additional variables
+                            ],
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        aspectRatio: 1,
+                        plugins: {
+                    legend: {
+                        labels: {
+                            color: fontColor // Set font color
+                        }
+                    }
+                }
+                    },
+                });
+            }
+
+            // Call the function to update the second donut chart
+            updateDonutChart4();
+        </script>
+    </div>
+</section>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+		<script>
+			var incomeElement = document.getElementById("income");
+			var expenseElement = document.getElementById("expense");
+			var balanceElement = document.getElementById("balance");
+			var currentMonthStats = JSON.parse(localStorage.getItem(new Date().toLocaleDateString('default', { month: 'long' })));
+			if (currentMonthStats == null) {
+				currentMonthStats = {
+					income: 0,
+					expense: 0,
+					balance: 0
+				}
+			}
+	
+			if (isNaN(currentMonthStats.expense)) {
+				currentMonthStats.expense = 0;
+			}
+			var income = currentMonthStats.income;
+			var expense = currentMonthStats.expense;
+	
+			incomeElement.innerHTML = incomeElement.innerHTML + income;
+			expenseElement.innerHTML = expenseElement.innerHTML + expense;
+			balanceElement.innerHTML = incomeElement.innerHTML - expenseElement.innerHTML;
+			// Add innerHTML to the income and expense elements which have 'badge' class
+			const elements = document.getElementsByClassName("badge");
+			for (let i = 0; i < elements.length; i++) {
+				elements[i].innerHTML = "<span> " + new Date().toLocaleString('default', { month: 'long' }) + "</span>";
+			}
+		</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+	<script>
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart);
+	
+		function drawChart() {
+			var chartData = generateChartData(); // Function to generate chart data
+	
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Month');
+			data.addColumn('number', 'Income');
+			data.addColumn('number', 'Expense');
+	
+			data.addRows(chartData);
+	
+			var options = {
+				title: 'Income vs Expense',
+				curveType: 'function',
+				legend: { position: 'bottom' }
+			};
+	
+			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+	
+			chart.draw(data, options);
+		}
+	
+		function generateChartData() {
+    var chartData = [];
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth();
+    var currentYear = currentDate.getFullYear();
+
+    // Loop through the past 12 months
+    for (var i = 0; i < 12; i++) {
+        var monthIndex = (currentMonth - i + 12) % 12; // Handle wrapping for previous year
+        var year = currentYear - Math.floor((currentMonth - i) / 12);
+        var monthName = new Date(year, monthIndex).toLocaleString('default', { month: 'long' });
+
+        // Retrieve all transaction data
+        var transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+        
+        // Filter transactions for the current month and year
+        var monthTransactions = transactions.filter(function(transaction) {
+            var transactionDate = new Date(transaction.date);
+            return transactionDate.getMonth() === monthIndex && transactionDate.getFullYear() === year;
+        });
+
+        // Calculate income and expense for the month
+        var income = 0;
+        var expense = 0;
+        monthTransactions.forEach(function(transaction) {
+            if (transaction.type === "income") {
+                income += parseFloat(transaction.amount);
+            } else if (transaction.type === "expense") {
+                expense += parseFloat(transaction.amount);
+            }
+        });
+
+        chartData.push([monthName, income, expense]);
+    }
+
+    return chartData.reverse(); // Reverse the array so that the current month is at the end
+}
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+<footer>
+
+	<style>
+		.container22 {
+		  position: relative;
+		  text-align: center;
+		  color: white;
+		}
+		
+		.bottom-left {
+		  position: absolute;
+		  bottom: 8px;
+		  left: 16px;
+		}
+		
+		.top-left {
+		  position: absolute;
+		  top: 8px;
+		  left: 16px;
+		}
+		
+		.top-right {
+		  position: absolute;
+		  top: 8px;
+		  right: 16px;
+		}
+		
+		.bottom-right {
+		  position: absolute;
+		  bottom: 8px;
+		  right: 16px;
+		}
+		
+		.centered {
+		  position: absolute;
+		  top: 20%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  padding-top: 400px;
+		}
+		</style>
+		</head>
+		<body>
+		
+		
+		
+		<div class="container22">
+		  <img src= "abstract-technology-futuristic-digital-square-pattern-with-lighting-glowing-particles-square-elements-on-dark-purple-background-free-vector.jpg" alt="Snow" style="width:100%;">
+		 
+		  <div class="centered">History at your fingertips - Sign up here to see what happened On THis Day, every day in your inbox.<br>
+
+
+			<form action="/action_page.php">
+				<label for="fname">Email:</label>
+				<input type="text" id="fname" name="fname">
+				<input type="submit" value="Submit">
+			  </form>
+			  
+			  <p>Click the "Submit" button and By signing up for this email, you are agreeing to news, offers, and information from BRITTINICA.<br>
+			
+			  <p style="padding-top: 30px;">Click here to view the solutions if you have problems to log into the webpage <a href="file:///C:/Users/Asus/Desktop/Personal%20Finance%20Tracker%20(2)%20(1)/Personal%20Finance%20Tracker/Help.html" style="color: #ff6700;">Help & FAQ</a></p><br>
+
+
+			  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			  <p style="font-weight: bold; font-size: 30px;"> STAY CONNECTED <i class="fa fa-facebook-official" aria-hidden="true"></i> <i class="fa fa-twitter" aria-hidden="true"></i> <i class="fa fa-youtube-play" aria-hidden="true"></i>  <i class="fa fa-instagram" aria-hidden="true"></i>  <i class="fa fa-telegram" aria-hidden="true"></i> </p>
+			  <p>@2024 Encyclopedia BRITTINICA</p>
+			</p>
+
+
+
+		  </div>
+
+		 
+		</div>
+  </footer>
+
+</html>

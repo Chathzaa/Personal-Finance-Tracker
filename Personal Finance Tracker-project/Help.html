@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html>
+<head >
+
+   <div style="background-color: #74736b; ;" >
+    <button class="moon-btn" >
+        <img src="images.png" alt="Moon" class="moon" >
+      </button>
+ <title>Help & FAQ</title>
+</div>
+</head>
+
+
+<body>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-color: #fff;
+    color: #222;
+
+   }
+
+
+   body.dark-mode {
+    /* Dark mode styles */
+    background-color:rgb(43, 40, 40);
+    color: #ddd;
+  }
+
+ 
+  
+  .moon-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+  }
+  
+  .moon {
+    width: 24px;
+    height: 24px;
+  }
+
+   
+
+   
+   nav ul {
+    background-color:#8d99ae;
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+   }
+
+   nav ul.dark-mode{
+    background-color: #222;
+   }
+
+
+   
+   nav ul li {
+    float: left;
+   }
+   
+   nav ul li a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+   }
+   
+   nav ul li a:hover {
+    background-color: #111;
+   }
+   
+   section {
+    padding: 20px;
+    margin-bottom: 20px;
+   }
+   
+   section h2 {
+    margin-top: 0;
+   }
+   
+   footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+   }
+
+
+   header {
+        background-color: #e8eddf;
+        color: black;
+        padding: 10px;
+        text-align: center;
+    }
+
+    header.dark-mode {
+        background-color: rgb(86, 85, 85);
+        color: #ddd;
+    }
+
+      /* Add this style for card buttons */
+  .card button.btn-link {
+    background-color: #b7efc5; /* Change this color to your desired color */
+    color: black;
+  }
+
+  /* Add this style for card buttons in dark mode */
+  .dark-mode .card button.btn-link {
+    background-color: #5a5d67; /* Change this color to your desired dark mode color */
+    color: white;
+  }
+
+  .card-body {
+    background-color: whitesmoke; /* Change this color to your desired color */
+    color: black;
+  }
+
+  /* Add this style for card buttons in dark mode */
+ .card-body.dark-mode {
+    background-color: #74736b; /* Change this color to your desired dark mode color */
+    color: white;
+  }
+
+
+
+
+
+
+
+   
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <header>
+ <h1> Help & FAQ</h1>
+</header>
+
+
+
+
+
+
+
+
+
+ <nav>
+ <ul>
+ <li><a href="file:///C:/Users/Asus/Desktop/Personal%20Finance%20Tracker-project/Home.html">Home</a></li>
+ <li><a href="#about">About</a></li>
+ <li><a href="#services">Services</a></li>
+ <li><a href="#contact">Contact</a></li>
+ </ul>
+ </nav>
+
+
+ <section>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-8 offset-md-2">
+          <h1>Frequently Asked Questions</h1>
+          <div id="accordion">
+              <div class="card">
+                  <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              What is a Personal Finance Tracker?
+                          </button>
+                      </h5>
+                  </div>
+
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                          A Personal Finance Tracker is a web application that helps you track and manage your personal finances. It allows you to record your income, expenses, and savings goals.
+                      </div>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              How do I Login into the Personal Finance Tracker?
+                          </button>
+                      </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                          To log into the account you can use username = "admin" and password = "password" and click the login button.
+                      </div>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              How do I record my income?
+                          </button>
+                      </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                          Once you've logged in, click on the "Add Income" button. Fill in the details of your income and click on the "Add Income" button to save.
+                      </div>
+                  </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            How do I Login into the Personal Finance Tracker?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body">
+                        To create an account, click on the "Sign Up" button on the login page. Fill in the required information and click on the "Create Account" button.
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+
+<script>
+
+$(document).ready(function () {
+            // Your existing script here
+
+            // Update history page
+            function updateHistoryPage() {
+                var historyData = JSON.parse(localStorage.getItem("transactions")) || [];
+                var historyContainer = $("#historyContainer tbody");
+                historyContainer.empty();
+
+                if (historyData.length === 0) {
+                    historyContainer.append('<tr><td colspan="5">No transactions recorded.</td></tr>');
+                } else {
+                    historyData.forEach(function (transaction) {
+                        var row = $('<tr></tr>');
+                        row.append('<td>' + transaction.name + '</td>');
+                        row.append('<td>' + transaction.type + '</td>');
+                        row.append('<td>' + transaction.category + '</td>');
+                        row.append('<td>' + transaction.date + '</td>');
+                        row.append('<td>' + transaction.amount + '</td>');
+                        historyContainer.append(row);
+                    });
+                }
+            }
+
+            // Your existing event listeners and functions
+
+            // Initialize the toast
+            $(".toast").toast({
+                autohide: false
+            });
+
+            // Update history page on initial load
+            updateHistoryPage();
+        });
+
+        // Log existing transactions before adding a new one
+        console.log("Existing Transactions:", transactions);
+
+        // Save transaction to local storage
+        saveTransaction(transaction);
+
+        // Log transactions after adding a new one
+        console.log("Updated Transactions:", transactions);
+        console.log("Updated History Data:", historyData);
+
+
+</script>
+ </section>
+
+
+
+
+
+
+
+
+ <section id="about">
+ <h2>About Us</h2>
+ <p>We are a team of dedicated professionals who strive to exceed our clients' expectations.</p>
+ </section>
+ <section id="services">
+ <h2>Our Other Services</h2>
+ <ul>
+ <li>Web Design and Development</li>
+ <li>Graphic Design</li>
+ <li>Digital Marketing</li>
+ </ul>
+ </section>
+ <section id="contact">
+ <h2>Contact Us</h2>
+ <p>Email us at info@example.com or call us at 123-456-7890.</p>
+ </section>
+ <footer>
+ <p> 2024@PersonalFinanceTracker</p>
+ </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script>
+ var images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+ var current = 0;
+
+ function changeImage() {
+    document.body.style.backgroundImage = 'url(' + images[current] + ')';
+    current = (current + 1) % images.length;
+ }
+
+ setInterval(changeImage, 5000);
+
+
+//Add function to get Dark mode into the web page
+ 
+const moonBtn = document.querySelector('.moon-btn');
+const body = document.body;
+const header = document.querySelector('header');
+
+
+
+
+moonBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    header.classList.toggle('dark-mode');
+  
+    
+    
+});
+
+
+
+
+ </script>
+ 
+</body>
+</html>

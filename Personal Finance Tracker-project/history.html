@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Personal Finance Tracker</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" href="favicon.png" type="x-icon">
+
+</head>
+
+<body style="background: linear-gradient(to bottom right, #f7ebfd, #f5ecfe, #ebddfe, #d6bffe, #cbaffe, #c1a0fe, #ac82fe, #a172fd);">
+    <div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar" class="active">
+			<h1>
+				<a href="history.html" class="logo">
+					<img src="logo.png" alt="Logo" style="max-width: 500px; max-height: 75px;">
+				</a>
+			</h1>
+			<ul class="list-unstyled components mb-5">
+				<li class="active">
+					<a href="index.html"><span class="fa fa-dashboard"></span> Dashboard</a>
+				</li>
+				<li>
+					<a href="transaction.html"><span class="fa fa-plus-circle"></span> New</a>
+				</li>
+				<li>
+					<a href="history.html"><span class="fa fa-bar-chart"></span> Analysis</a>
+				</li>
+				<li>
+					<a href="Help.html"><span class="fa fa-question-circle"></span> Help</a>
+				</li>
+			</ul>
+		</nav>
+        <!-- Page Content  -->
+		<div id="content" class="p-4 p-md-5">
+			<nav class="navbar navbar-expand-lg" style="background-color: #e7c6ff; ">
+				<div class="container-fluid">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+						<i class="fa fa-bars"></i>
+						<span class="sr-only">Toggle Menu</span>
+					</button>
+					<!--<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fa fa-bars"></i>
+					</button> -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <!--<a class="nav-link" href="#" id="greeting">
+                                    Hi, User
+                                </a>-->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        
+            <div class="container">
+                <div class="header-container">
+                    <h3 class="section-header" style="padding-left: 400px;">HISTORY</h3>
+                </div>
+                <main class="row d-md-flex d-sm-block justify-content-center mx-2">
+                    <table class="table table-responsive table-borderless" id="911" style="padding-left: 250px;">
+                        <tr>
+                            <th>Transactions
+                            </th>
+                            <th>Date
+                            </th>
+                            <th>Amount
+                            </th>
+                            <th>Transaction Status
+                            </th>
+                        </tr>
+                    </table>
+
+
+                    <div style="padding-top: 30px;  padding-right: 200px; padding-left: 120px;">
+        
+
+            
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            
+                        
+                <canvas id="expenseIncomeChart" width="400" height="400" ></canvas>
+                </main>
+            </div>
+        </div>     
+    
+    <script>
+    // Function to update the pie chart
+    function updatePieChart() {
+        var expenseData = JSON.parse(localStorage.getItem("transactions")) || [];
+        var expenseCategories = {};
+        var incomeCategories = {};
+    
+        // Separate expenses and income based on categories
+        expenseData.forEach(function (transaction) {
+            if (transaction.type === "expense") {
+                if (expenseCategories.hasOwnProperty(transaction.category)) {
+                    expenseCategories[transaction.category] += parseFloat(transaction.amount);
+                } else {
+                    expenseCategories[transaction.category] = parseFloat(transaction.amount);
+                }
+            } else if (transaction.type === "income") {
+                if (incomeCategories.hasOwnProperty(transaction.category)) {
+                    incomeCategories[transaction.category] += parseFloat(transaction.amount);
+                } else {
+                    incomeCategories[transaction.category] = parseFloat(transaction.amount);
+                }
+            }
+        });
+    
+        // Prepare data for the chart
+        var expenseDataArray = Object.values(expenseCategories);
+        var incomeDataArray = Object.values(incomeCategories);
+        var expenseLabels = Object.keys(expenseCategories);
+        var incomeLabels = Object.keys(incomeCategories);
+    
+        // Create a pie chart
+        var ctx = document.getElementById('expenseIncomeChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: expenseLabels.concat(incomeLabels),
+                datasets: [{
+                    data: expenseDataArray.concat(incomeDataArray),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                    ],
+                }],
+            },
+        });
+    }
+    
+    // Call the function to update the pie chart
+    updatePieChart();
+    </script>
+           </div>
+
+    </div>  
+        <!--Letter image-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function render() {
+            var transactions = JSON.parse(localStorage.getItem("transactions"));
+            var table = document.getElementById("911");
+
+            transactions.forEach(function (transaction) {
+                var createtr = document.createElement("tr");
+
+                var createtd = document.createElement("td");
+                var createtd2 = document.createElement("td"); // Fixed variable name
+                var createtd3 = document.createElement("td");
+                var createtd4 = document.createElement("td");
+
+                var createp = document.createElement("td");
+                var createp2 = document.createElement("td");
+                var createp3 = document.createElement("td");
+                var createp4 = document.createElement("td");
+
+                createtd.appendChild(createp);
+                createtd2.appendChild(createp2);
+                createtd3.appendChild(createp3);
+                createtd4.appendChild(createp4);
+
+                createp.innerHTML = transaction.name;
+                createp2.innerHTML = transaction.date;
+                createp3.innerHTML = 'Rs.  ' + transaction.amount;
+
+
+                if (transaction.type == "expense") {
+                    createp4.innerHTML = '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="8" fill="#DB2719" fill-opacity="0.3"/><circle cx="8" cy="8" r="4" fill="#DB2719"/></svg>' + transaction.type;
+                }
+                else {
+                    createp4.innerHTML = '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="8" fill="#DBA32A" fill-opacity="0.14"/><circle cx="8" cy="8" r="4" fill="#7FB519"/></svg>' + transaction.type;
+                }
+                createtd.appendChild(createp);
+                createtd2.appendChild(createp2);
+                createtd3.appendChild(createp3);
+                createtd4.appendChild(createp4);
+
+                createtr.appendChild(createtd);
+                createtr.appendChild(createtd2);
+                createtr.appendChild(createtd3);
+                createtr.appendChild(createtd4);
+
+                table.appendChild(createtr);
+            });
+        }
+        render();
+
+// Call the renderMonthlySummary function
+renderMonthlySummary();
+
+    </script>
+    <script>
+        var name = localStorage.getItem("name");
+        if (name != null) {
+            document.getElementById("greeting").innerHTML = "Hi, " + name;
+        }
+    </script>
+
+
+
+
+
+</body>
+
+
+<footer>
+
+	<style>
+		.container22 {
+		  position: relative;
+		  text-align: center;
+		  color: white;
+		}
+		
+		.bottom-left {
+		  position: absolute;
+		  bottom: 8px;
+		  left: 16px;
+		}
+		
+		.top-left {
+		  position: absolute;
+		  top: 8px;
+		  left: 16px;
+		}
+		
+		.top-right {
+		  position: absolute;
+		  top: 8px;
+		  right: 16px;
+		}
+		
+		.bottom-right {
+		  position: absolute;
+		  bottom: 8px;
+		  right: 16px;
+		}
+		
+		.centered {
+		  position: absolute;
+		  top: 20%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  padding-top: 400px;
+		}
+		</style>
+		</head>
+		<body>
+		
+		
+		
+		<div class="container22">
+		  <img src= "abstract-technology-futuristic-digital-square-pattern-with-lighting-glowing-particles-square-elements-on-dark-purple-background-free-vector.jpg" alt="Snow" style="width:100%;">
+		 
+		  <div class="centered">History at your fingertips - Sign up here to see what happened On THis Day, every day in your inbox.<br>
+
+
+			<form action="/action_page.php">
+				<label for="fname">Email:</label>
+				<input type="text" id="fname" name="fname">
+				<input type="submit" value="Submit">
+			  </form>
+			  
+			  <p>Click the "Submit" button and By signing up for this email, you are agreeing to news, offers, and information from BRITTINICA.<br>
+			
+			  <p style="padding-top: 30px;">Click here to view the solutions if you have problems to log into the webpage <a href="file:///C:/Users/Asus/Desktop/Personal%20Finance%20Tracker%20(2)%20(1)/Personal%20Finance%20Tracker/Help.html" style="color: #ff6700;">Help & FAQ</a></p><br>
+
+
+			  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			  <p style="font-weight: bold; font-size: 30px;"> STAY CONNECTED <i class="fa fa-facebook-official" aria-hidden="true"></i> <i class="fa fa-twitter" aria-hidden="true"></i> <i class="fa fa-youtube-play" aria-hidden="true"></i>  <i class="fa fa-instagram" aria-hidden="true"></i>  <i class="fa fa-telegram" aria-hidden="true"></i> </p>
+			  <p>@2024 Encyclopedia BRITTINICA</p>
+			</p>
+
+
+
+		  </div>
+
+		 
+		</div>
+  </footer>
+
+
+
+</html>
